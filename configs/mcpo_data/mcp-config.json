@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "mcp-openstack": {
+      "type": "streamable-http",
+      "url": "http://host.docker.internal:8001/mcp",
+      "headers": {
+        "Authorization": "Bearer"
+      }
+    }
+  }
+}
