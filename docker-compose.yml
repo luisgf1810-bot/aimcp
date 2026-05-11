@@ -32,8 +32,8 @@ services:
     volumes:
       - ./src:/app/src/
       - ./scripts:/app/scripts
+      - ./configs/openstack/cacert.pem:/etc/ssl/certs/openstack-ca.pem:ro
       - .env:/app/.env:ro
-      - /var/snap/microstack/common/etc/ssl/certs/cacert.pem:/etc/ssl/certs/openstack-ca.pem:ro
     extra_hosts:
       - "host.docker.internal:host-gateway"
     healthcheck:
