@@ -30,7 +30,7 @@ services:
     ports:
       - "${DOCKER_EXTERNAL_PORT_MCP_SERVER}:8001" 
     volumes:
-      - ./src:/app/src/
+      - ./src:/app/src
       - ./scripts:/app/scripts
       - ./configs/openstack/cacert.pem:/etc/ssl/certs/openstack-ca.pem:ro
       - .env:/app/.env:ro
