@@ -30,10 +30,10 @@ services:
     ports:
       - "${DOCKER_EXTERNAL_PORT_MCP_SERVER}:8001" 
     volumes:
-      - ./src:/app/src
-      - ./scripts:/app/scripts
-      - ./configs/openstack/cacert.pem:/etc/ssl/certs/openstack-ca.pem:ro
-      - .env:/app/.env:ro
+      - /home/luis/Develop/test/ai/aicmp/src:/app/src
+      - /home/luis/Develop/test/ai/aicmp/scripts:/app/scripts
+      - /home/luis/Develop/test/ai/aicmp/configs/openstack/cacert.pem:/etc/ssl/certs/openstack-ca.pem:ro
+      - /home/luis/Develop/test/ai/aicmp/.env:/app/.env:ro
     extra_hosts:
       - "host.docker.internal:host-gateway"
     healthcheck:
