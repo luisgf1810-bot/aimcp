@@ -17,4 +17,4 @@ RUN pip install \
         'openstacksdk>=4.1.0,<=4.9.0' \
         'python-dotenv>=1.1.1'
 
-CMD ["/bin/bash", "/app/scripts/mcp-server-docker-cmd.sh"]
+CMD ["/bin/bash", "/app/docker/mcp-server-docker-cmd.sh"]

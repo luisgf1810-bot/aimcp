@@ -1,7 +1,7 @@
 services:
 
   open-webui:
-    env_file: .env
+    env_file: server.env    
     image: ghcr.io/open-webui/open-webui:ollama
     container_name: open-webui
     restart: unless-stopped
@@ -17,12 +17,12 @@ services:
         reservations:
           devices:
             - driver: nvidia
-              count: 2
+              count: ${GPUS}
               capabilities: [gpu]
 
   mcp-openstack:
-    env_file: .env
-    image: mcp-server-openstack-ops
+    env_file: server.env
+    image: mcp-openstack
     build: 
       context: .
       dockerfile: ./docker/Dockerfile.MCP-Server
@@ -31,8 +31,9 @@ services:
       - "${DOCKER_EXTERNAL_PORT_MCP_SERVER}:8001" 
     volumes:
       - ./src:/app/src
+      - ./docker:/app/docker
       - ./scripts:/app/scripts
-      - ./configs/openstack/cacert.pem:/etc/ssl/certs/openstack-ca.pem:ro
+      - ./configs/openstack/laptop_cacert.pem:/etc/ssl/certs/openstack-ca.pem:ro
       - .env:/app/.env:ro
     extra_hosts:
       - "host.docker.internal:host-gateway"
@@ -44,13 +45,10 @@ services:
       start_period: 10s
 
 
-  mcp-proxy:
-    env_file: .env
+  mcpo-proxy:
+    env_file: server.env
     image: ghcr.io/open-webui/mcpo:main
-    build: 
-      context: .
-      dockerfile: ./docker/Dockerfile.MCPO-Proxy
-    container_name: mcp-proxy
+    container_name: mcpo-proxy
     restart: unless-stopped
     depends_on:
       mcp-openstack:
